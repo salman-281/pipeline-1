@@ -22,15 +22,26 @@ jobs:
           port: ${{ secrets.EC2_PORT }}
 
           script: |
-            cd ~/deploy-frontend
+            # Load NVM so node/npm/pm2 work
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+            echo "Node version"
+            node -v
+
+            echo "NPM version"
+            npm -v
+
+            echo "Go to project folder"
+            cd ~/deploy-frontend-aws
 
             echo "Pull latest code"
             git pull origin main
 
             echo "Install dependencies"
-            npm install
+            npm ci
 
-            echo "Build frontend"
+            echo "Build Next.js app"
             npm run build
 
             echo "Restart frontend app"
