@@ -52,7 +52,7 @@ const Page = () => {
       {/* HEADER */}
       <div className="bg-gradient-to-r from-black to-gray-800 text-white py-10">
         <div className="max-w-6xl mx-auto px-6">
-          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+          <h1 className="text-3xl font-bold">Admin Dashboard Management</h1>
           <p className="text-gray-300 text-sm mt-1">
             Manage all registered users in your system
           </p>
