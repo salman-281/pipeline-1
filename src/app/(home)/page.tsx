@@ -41,7 +41,7 @@ const Page = () => {
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center text-red-500">
-        Failed to load users
+        Failed to load users 
       </div>
     );
   }
