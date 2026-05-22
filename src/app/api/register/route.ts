@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const { name, email, password } = await request.json();
 
     const response = await fetch(
-      `${process.env.BACKEND_URL}${process.env.REGISTER_URL}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}${process.env.NEXT_PUBLIC_REGISTER_URL}`,
       {
         method: "POST",
         headers: {

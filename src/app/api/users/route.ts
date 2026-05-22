@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const response = await fetch(
-      `${process.env.BACKEND_URL}${process.env.GET_ALL_USERS_URL}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}${process.env.NEXT_PUBLIC_GET_ALL_USERS_URL}`,
       {
         method: "GET",
         headers: {
