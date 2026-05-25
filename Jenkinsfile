@@ -93,7 +93,7 @@ pipeline {
 
                     </div>
                 </body>
-                </html>
+                </html> 
                 """,
                 to: "${EMAIL_TO}"
             )
