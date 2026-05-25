@@ -8,6 +8,8 @@ pipeline {
     environment {
         VERCEL_TOKEN = credentials('vercel-token')
         EMAIL_TO = 'salman034810@gmail.com'
+        TWILIO_SID = credentials('twilio-sid')
+        TWILIO_TOKEN = credentials('twilio-token')
     }
 
     stages {
@@ -34,6 +36,14 @@ pipeline {
     post {
 
     success {
+
+          bat '''
+    curl -X POST https://api.twilio.com/2010-04-01/Accounts/%TWILIO_SID%/Messages.json ^
+    --data-urlencode "From=whatsapp:+14155238886" ^
+    --data-urlencode "To=whatsapp:+923481077653" ^
+    --data-urlencode "Body=✅ Build SUCCESS: %JOB_NAME% Build #%BUILD_NUMBER%" ^
+    -u %TWILIO_SID%:%TWILIO_TOKEN%
+    '''
         emailext(
             to: "salman034810@gmail.com",
             subject: "✅ SUCCESS | ${JOB_NAME} #${BUILD_NUMBER}",
@@ -60,6 +70,15 @@ pipeline {
     }
 
     failure {
+
+
+        bat '''
+    curl -X POST https://api.twilio.com/2010-04-01/Accounts/%TWILIO_SID%/Messages.json ^
+    --data-urlencode "From=whatsapp:+14155238886" ^
+    --data-urlencode "To=whatsapp:+923481077653" ^
+    --data-urlencode "Body=❌ Build FAILED: %JOB_NAME% Build #%BUILD_NUMBER%" ^
+    -u %TWILIO_SID%:%TWILIO_TOKEN%
+    '''
         emailext(
             to: "salman034810@gmail.com",
             subject: "❌ FAILED | ${JOB_NAME} #${BUILD_NUMBER}",
