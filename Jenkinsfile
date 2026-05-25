@@ -33,70 +33,56 @@ pipeline {
 
     post {
 
-        success {
-            emailext(
-                subject: "✅ SUCCESS | ${JOB_NAME} #${BUILD_NUMBER}",
-                mimeType: 'text/html',
-                body: """
-                <html>
-                <body style="font-family:Arial;padding:20px;background:#f4f4f4;">
-                    <div style="background:white;padding:30px;border-radius:10px;">
-                        <h2 style="color:#16a34a;">
-                            ✅ Deployment Successful
-                        </h2>
+    success {
+        emailext(
+            to: "salman034810@gmail.com",
+            subject: "✅ SUCCESS | ${JOB_NAME} #${BUILD_NUMBER}",
+            mimeType: 'text/html',
+            from: "salman034810@gmail.com",
+            replyTo: "salman034810@gmail.com",
+            body: """
+            <html>
+            <body>
+                <h2>✅ Deployment Successful</h2>
 
-                        <p>Jenkins CI/CD pipeline completed successfully.</p>
+                <p>Project: ${JOB_NAME}</p>
+                <p>Build: #${BUILD_NUMBER}</p>
+                <p>Status: SUCCESS</p>
 
-                        <p><b>Project:</b> ${JOB_NAME}</p>
-                        <p><b>Build:</b> #${BUILD_NUMBER}</p>
-                        <p><b>Status:</b>
-                        <span style="color:green;">
-                        SUCCESS
-                        </span></p>
+                <a href="${BUILD_URL}">
+                    View Build
+                </a>
 
-                        <a href="${BUILD_URL}">
-                        View Build
-                        </a>
-
-                    </div>
-                </body>
-                </html>
-                """,
-                to: "${EMAIL_TO}"
-            )
-        }
-
-        failure {
-            emailext(
-                subject: "❌ FAILED | ${JOB_NAME} #${BUILD_NUMBER}",
-                mimeType: 'text/html',
-                body: """
-                <html>
-                <body style="font-family:Arial;padding:20px;background:#f4f4f4;">
-                    <div style="background:white;padding:30px;border-radius:10px;">
-                        <h2 style="color:#dc2626;">
-                            ❌ Deployment Failed
-                        </h2>
-
-                        <p>Jenkins CI/CD pipeline failed.</p>
-
-                        <p><b>Project:</b> ${JOB_NAME}</p>
-                        <p><b>Build:</b> #${BUILD_NUMBER}</p>
-                        <p><b>Status:</b>
-                        <span style="color:red;">
-                        FAILED
-                        </span></p>
-
-                        <a href="${BUILD_URL}"> 
-                        View Logs
-                        </a>
-
-                    </div>
-                </body>
-                </html> 
-                """,
-                to: "${EMAIL_TO}"
-            )
-        }
+            </body>
+            </html>
+            """
+        )
     }
+
+    failure {
+        emailext(
+            to: "salman034810@gmail.com",
+            subject: "❌ FAILED | ${JOB_NAME} #${BUILD_NUMBER}",
+            mimeType: 'text/html',
+            from: "salman034810@gmail.com",
+            replyTo: "salman034810@gmail.com",
+            body: """
+            <html>
+            <body>
+                <h2>❌ Deployment Failed</h2>
+
+                <p>Project: ${JOB_NAME}</p>
+                <p>Build: #${BUILD_NUMBER}</p>
+                <p>Status: FAILED</p>
+
+                <a href="${BUILD_URL}">
+                    View Logs
+                </a>
+
+            </body>
+            </html>
+            """
+        )
+    }
+}
 }
