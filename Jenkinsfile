@@ -87,7 +87,7 @@ pipeline {
                         FAILED
                         </span></p>
 
-                        <a href="${BUILD_URL}">
+                        <a href="${BUILD_URL}"> 
                         View Logs
                         </a>
 
